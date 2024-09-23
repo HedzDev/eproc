@@ -1,8 +1,8 @@
 "use client";
-import Logo from "./Logo";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "../lib/utils";
+import Logo from "./Logo";
 
 export default function Header() {
   const pathname = usePathname();
@@ -13,7 +13,7 @@ export default function Header() {
   ];
 
   return (
-    <header className=" bg-cyan-700 flex justify-between items-center px-5 py-5">
+    <header className="bg-cyan-700 flex justify-between items-center px-5 py-5">
       <Logo />
 
       <nav>
