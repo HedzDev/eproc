@@ -10,7 +10,7 @@ type ProductCardProps = {
 export default function ProductCard({ product }: ProductCardProps) {
   return (
     <Link href={`/products/${product.id}`}>
-      <div className="min-h-[400px] w-[350px] flex flex-col rounded-md bg-slate-100 shadow-md hover:cursor-pointer hover:scale-105 transition hover:shadow-2xl">
+      <div className="h-[500px] w-[350px] flex flex-col rounded-md bg-slate-100 shadow-md hover:cursor-pointer hover:scale-[102%] transition hover:shadow-2xl">
         <Image
           src="/poster.jpg"
           alt={product.title}

@@ -4,7 +4,7 @@ import React from "react";
 
 export default function ProductsPage() {
   return (
-    <div>
+    <div className="min-h-screen">
       <CategoriesFilter />
 
       <Products />

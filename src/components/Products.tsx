@@ -160,8 +160,8 @@ const productsData = [
 
 export default function Products() {
   return (
-    <main className="mt-4">
-      <section className="grid grid-cols-1 md:grid-cols-3 gap-4">
+    <main className="mt-4 flex justify-around">
+      <section className="grid grid-cols-1 md:grid-cols-3 gap-12">
         {productsData.map((product, index) => (
           <ProductCard key={index} product={product} />
         ))}

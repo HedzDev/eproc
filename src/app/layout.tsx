@@ -1,3 +1,4 @@
+import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import type { Metadata } from "next";
 import localFont from "next/font/local";
@@ -15,7 +16,7 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Pro Commerce",
+  title: "E-Shop",
   description: "Buy at the best price",
 };
 
@@ -27,10 +28,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen w-[80%] mx-auto bg-[#E5E8EC] text-sm text-zinc-900`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen md:w-[80%] mx-auto bg-[#E5E8EC] text-sm text-zinc-900`}
       >
         <Header />
         {children}
+        <Footer />
       </body>
     </html>
   );

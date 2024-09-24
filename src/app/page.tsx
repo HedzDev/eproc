@@ -32,10 +32,10 @@ export default function Home() {
   ));
 
   return (
-    <main className="flex items-center md:h-[calc(100vh-200px)] mt-10 flex-col">
+    <main className="flex items-center min-h-screen mt-7 flex-col">
       <Brands />
 
-      <section className="flex flex-col md:flex-row gap-4 md:gap-6 mt-20">
+      <section className="flex flex-col md:flex-row gap-4 md:gap-6 mt-10">
         {products}
       </section>
     </main>
