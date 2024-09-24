@@ -1,7 +1,6 @@
 import { ProductType } from "@/lib/types";
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
 
 type ProductCardProps = {
   product: ProductType;

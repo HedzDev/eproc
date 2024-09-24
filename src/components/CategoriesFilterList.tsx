@@ -1,6 +1,6 @@
 import Filter from "./Filter";
 
-export default function CategoriesFilter() {
+export default function CategoriesFilterList() {
   return (
     <div className=" bg-slate-50/70 flex justify-between px-4 rounded-sm mt-2">
       <Filter />

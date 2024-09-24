@@ -158,7 +158,11 @@ const productsData = [
   },
 ];
 
-export default function Products() {
+export default async function ProductsList() {
+  const res = await fetch("http://localhost:80/products");
+  const data = await res.json();
+  console.log(data);
+
   return (
     <main className="mt-4 flex justify-around">
       <section className="grid grid-cols-1 md:grid-cols-3 gap-12">

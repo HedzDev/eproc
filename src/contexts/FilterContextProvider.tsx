@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter, useSearchParams } from "next/navigation";
-import { createContext, useEffect, useState } from "react";
+import { createContext, useState } from "react";
 
 type TFilterContextProps = {
   children: React.ReactNode;
@@ -20,24 +20,26 @@ export default function FilterContextProvider({
 }: TFilterContextProps) {
   const router = useRouter();
   const searchParams = useSearchParams();
-
   const [selectedFilter, setSelectedFilter] = useState("all");
+
   const filterOptions = [
     { value: "all", label: "All" },
     { value: "t-shirt", label: "T-Shirt" },
-    { value: "shirt", label: "Shirt" },
     { value: "jeans", label: "Jeans" },
-    { value: "jacket", label: "Jacket" },
-    { value: "shoes", label: "Shoes" },
-    { value: "accessories", label: "Accessories" },
-    { value: "bags", label: "Bags" },
+    { value: "sneackers", label: "Sneackers" },
   ];
 
-  useEffect(() => {
-    if (!searchParams.has("category")) {
-      router.replace(`products?category=all`);
-    }
-  }, [searchParams, router]);
+  //   useEffect(() => {
+  //     const category = searchParams.get("category");
+  //     console.log(category);
+
+  //     if (category) {
+  //       setSelectedFilter(category);
+  //     } else {
+  //       // If no category is set in URL, set it to "all" by default
+  //       router.push(`/products?category=all`);
+  //     }
+  //   }, [searchParams, router]);
 
   function createQueryString(name: string, value: string) {
     const params = new URLSearchParams(searchParams.toString());
@@ -47,11 +49,7 @@ export default function FilterContextProvider({
   }
 
   function handleFilter(option: string) {
-    router.push(
-      `products?${createQueryString("category", option)
-        .replace(/%2C/g, ",")
-        .replace(/%20/g, "-")}`
-    );
+    router.push(`products?${createQueryString("category", option)}`);
     setSelectedFilter(option);
   }
 

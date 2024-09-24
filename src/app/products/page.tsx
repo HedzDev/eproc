@@ -1,13 +1,13 @@
-import CategoriesFilter from "@/components/CategoriesFilter";
-import Products from "@/components/Products";
+import CategoriesFilterList from "@/components/CategoriesFilterList";
+import ProductsList from "@/components/ProductsList";
 import React from "react";
 
 export default function ProductsPage() {
   return (
     <div className="min-h-screen">
-      <CategoriesFilter />
+      <CategoriesFilterList />
 
-      <Products />
+      <ProductsList />
     </div>
   );
 }
