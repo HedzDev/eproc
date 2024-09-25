@@ -4,4 +4,11 @@ export type ProductType = {
   description: string;
   price: number;
   image: string;
+  category: string[];
+};
+
+export type CategoryType = {
+  id: string;
+  name: string;
+  products: string[];
 };

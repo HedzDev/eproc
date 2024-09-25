@@ -1,13 +1,17 @@
-import CategoriesFilterList from "@/components/CategoriesFilterList";
+import CategoriesFilterBlock from "@/components/CategoriesFilterBlock";
 import ProductsList from "@/components/ProductsList";
-import React from "react";
+import { useFetchProducts } from "@/lib/hooks";
 
-export default function ProductsPage() {
+export default async function ProductsPage() {
+  const productsData = await useFetchProducts();
+
+  if (!productsData) return null;
+
   return (
     <div className="min-h-screen">
-      <CategoriesFilterList />
+      <CategoriesFilterBlock />
 
-      <ProductsList />
+      <ProductsList productsData={productsData} />
     </div>
   );
 }

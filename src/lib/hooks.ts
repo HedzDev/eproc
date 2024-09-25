@@ -21,15 +21,40 @@ export function useFilter() {
 }
 
 export async function useFetchProducts() {
-  const { data } = await api.get("http://localhost:80/products");
-  const productsData: ProductType[] = data["hydra:member"];
+  try {
+    const { data } = await api.get("http://localhost:80/products");
+    if (!data) throw new Error("No data found");
 
-  return productsData;
+    const productsData: ProductType[] = data["hydra:member"];
+
+    return productsData;
+  } catch (error) {
+    console.error(error);
+  }
 }
 
 export async function useGetProductById(id: string) {
-  const { data } = await api.get(`http://localhost:80/products/${id}`);
-  const productData: ProductType = data;
+  try {
+    const { data } = await api.get(`http://localhost:80/products/${id}`);
+    if (!data) throw new Error("No data found");
 
-  return productData;
+    const productData: ProductType = data;
+
+    return productData;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+export async function useFetchCategories() {
+  try {
+    const { data } = await api.get("http://localhost:80/categories");
+    if (!data) throw new Error("No data found");
+
+    const categoriesData = data["hydra:member"];
+
+    return categoriesData;
+  } catch (error) {
+    console.error(error);
+  }
 }

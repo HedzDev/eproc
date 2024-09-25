@@ -10,7 +10,6 @@ type TFilterContextProps = {
 type TFilterContext = {
   selectedFilter: string;
   handleFilter: (option: string) => void;
-  filterOptions: { value: string; label: string }[];
 };
 
 export const FilterContext = createContext<TFilterContext | null>(null);
@@ -22,13 +21,6 @@ export default function FilterContextProvider({
   const searchParams = useSearchParams();
   const [selectedFilter, setSelectedFilter] = useState("all");
 
-  const filterOptions = [
-    { value: "all", label: "All" },
-    { value: "t-shirt", label: "T-Shirt" },
-    { value: "jeans", label: "Jeans" },
-    { value: "sneackers", label: "Sneackers" },
-  ];
-
   function createQueryString(name: string, value: string) {
     const params = new URLSearchParams(searchParams.toString());
     params.set(name, value);
@@ -37,7 +29,8 @@ export default function FilterContextProvider({
   }
 
   function handleFilter(option: string) {
-    router.push(`products?${createQueryString("category", option)}`);
+    router.push(`products?${createQueryString("categories", option)}`);
+
     setSelectedFilter(option);
   }
 
@@ -46,7 +39,6 @@ export default function FilterContextProvider({
       value={{
         selectedFilter,
         handleFilter,
-        filterOptions,
       }}
     >
       {children}
