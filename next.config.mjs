@@ -4,9 +4,17 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "placehold.co",
+        hostname: "www.pull-in.com",
         port: "",
-        pathname: "/400",
+        pathname: "/media/catalog/**",
+      },
+      {
+        protocol: "https",
+        hostname: "**.jules.com",
+      },
+      {
+        protocol: "https",
+        hostname: "**.okumak.fr",
       },
     ],
   },

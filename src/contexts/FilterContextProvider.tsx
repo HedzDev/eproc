@@ -29,18 +29,6 @@ export default function FilterContextProvider({
     { value: "sneackers", label: "Sneackers" },
   ];
 
-  //   useEffect(() => {
-  //     const category = searchParams.get("category");
-  //     console.log(category);
-
-  //     if (category) {
-  //       setSelectedFilter(category);
-  //     } else {
-  //       // If no category is set in URL, set it to "all" by default
-  //       router.push(`/products?category=all`);
-  //     }
-  //   }, [searchParams, router]);
-
   function createQueryString(name: string, value: string) {
     const params = new URLSearchParams(searchParams.toString());
     params.set(name, value);
