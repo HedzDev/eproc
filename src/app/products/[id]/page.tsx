@@ -13,6 +13,10 @@ export default async function ProductPage({ params }: ProductPageProps) {
 
   const productData = await useGetProductById(id);
 
+  if (!productData) {
+    return <h1>Product not found</h1>;
+  }
+
   return (
     <>
       <Link href="/products">
@@ -21,6 +25,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
           <span>Back</span>
         </Button>
       </Link>
+
       <main className="bg-slate-100 w-[90%] min-h-[85vh] mx-auto mt-4 p-7 flex  md:flex-row flex-col-reverse lg:justify-between">
         <div className="mt-10 space-y-6">
           <h1 className="text-3xl md:text-7xl">{productData.name}</h1>
