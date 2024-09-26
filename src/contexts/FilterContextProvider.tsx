@@ -19,7 +19,9 @@ export default function FilterContextProvider({
 }: TFilterContextProps) {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const [selectedFilter, setSelectedFilter] = useState("all");
+  const [selectedFilter, setSelectedFilter] = useState(() => {
+    return searchParams.get("categories") || "all";
+  });
 
   function createQueryString(name: string, value: string) {
     const params = new URLSearchParams(searchParams.toString());
