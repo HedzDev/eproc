@@ -27,6 +27,7 @@ export default function EditItemForm({
       description: product.description,
       price: product.price,
       image: product.image,
+      category: product.category,
     },
   });
 
@@ -107,6 +108,7 @@ export default function EditItemForm({
       </div>
 
       <div className="space-y-1">
+        <Input id="category" type="hidden" {...register("category")} />
         <Button type="submit" className="mt-4">
           Edit
         </Button>

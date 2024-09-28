@@ -14,13 +14,15 @@ type ProductsListProps = {
 export default function ProductsList({ productsData }: ProductsListProps) {
   const { selectedFilter } = useFilter();
   const params = useSearchParams();
+  const regex = /\/categories\/(\d+)/;
 
   const filteredProducts =
     selectedFilter === "all" || !params.get("categories")
       ? productsData
-      : productsData?.filter(
-          (product) => product.category[0].at(-1) === params.get("categories")
-        );
+      : productsData?.filter((product) => {
+          const categoryMatch = product.category[0]?.match(regex)?.[1];
+          return categoryMatch === params.get("categories");
+        });
 
   return (
     <main className="mt-4 flex flex-col items-center justify-around">

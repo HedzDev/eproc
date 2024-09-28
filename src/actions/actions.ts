@@ -38,6 +38,7 @@ export async function editProduct(formData: FormData, id: number) {
     description: formData.get("description"),
     price: +(formData.get("price") || 0),
     image: formData.get("image"),
+    category: formData.get("category"),
   };
 
   try {
