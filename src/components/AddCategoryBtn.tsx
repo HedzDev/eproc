@@ -2,7 +2,6 @@
 
 import { PlusCircledIcon } from "@radix-ui/react-icons";
 import { useState } from "react";
-import { flushSync } from "react-dom";
 import CategoryForm from "./CategoryForm";
 import { Button } from "./ui/button";
 import {
@@ -29,9 +28,7 @@ export default function AddCategoryBtn() {
           <DialogTitle>Add Category</DialogTitle>
         </DialogHeader>
 
-        <CategoryForm
-          onFormSubmission={() => flushSync(() => setIsFormOpen(false))}
-        />
+        <CategoryForm onFormSubmission={() => setIsFormOpen(false)} />
       </DialogContent>
     </Dialog>
   );

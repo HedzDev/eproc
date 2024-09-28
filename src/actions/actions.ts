@@ -16,6 +16,10 @@ export async function createCategory(formData: FormData) {
   };
 
   try {
+    if (!data.name) {
+      throw new Error("Category name is required");
+    }
+
     await api.post("http://localhost:80/categories", JSON.stringify(data), {
       headers: {
         "Content-Type": "application/ld+json",
@@ -26,4 +30,25 @@ export async function createCategory(formData: FormData) {
   }
 
   revalidatePath("/categories");
+}
+
+export async function editProduct(formData: FormData, id: number) {
+  const data = {
+    name: formData.get("name"),
+    description: formData.get("description"),
+    price: +(formData.get("price") || 0),
+    image: formData.get("image"),
+  };
+
+  try {
+    await api.put(`http://localhost:80/products/${id}`, JSON.stringify(data), {
+      headers: {
+        "Content-Type": "application/ld+json",
+      },
+    });
+  } catch (error) {
+    console.error(error);
+  }
+
+  revalidatePath("/products");
 }

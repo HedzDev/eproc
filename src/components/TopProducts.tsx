@@ -1,12 +1,11 @@
 import { useFetchProducts } from "@/lib/hooks";
-import React from "react";
 import ProductCard from "./ProductCard";
 
 export default async function TopProducts() {
   const productsData = await useFetchProducts();
-  const onlyTopArticles = productsData.slice(0, 3);
+  const onlyTopArticles = productsData?.slice(0, 3);
 
-  const products = onlyTopArticles.map((product) => (
+  const products = onlyTopArticles?.map((product) => (
     <ProductCard key={product.id} product={product} />
   ));
 
