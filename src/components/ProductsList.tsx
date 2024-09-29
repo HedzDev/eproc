@@ -1,11 +1,10 @@
 "use client";
 
 import { useFilter } from "@/lib/hooks";
-import ProductCard from "./ProductCard";
-import { useSearchParams } from "next/navigation";
 import { ProductType } from "@/lib/types";
-import { Button } from "./ui/button";
-import { PlusCircledIcon } from "@radix-ui/react-icons";
+import { useSearchParams } from "next/navigation";
+import ModalForm from "./ModalForm";
+import ProductCard from "./ProductCard";
 
 type ProductsListProps = {
   productsData: ProductType[];
@@ -13,6 +12,7 @@ type ProductsListProps = {
 
 export default function ProductsList({ productsData }: ProductsListProps) {
   const { selectedFilter } = useFilter();
+
   const params = useSearchParams();
   const regex = /\/categories\/(\d+)/;
 
@@ -32,9 +32,7 @@ export default function ProductsList({ productsData }: ProductsListProps) {
         ))}
       </section>
 
-      <Button className="bg-cyan-700 hover:bg-cyan-700/70 text-2xl w-max mt-20">
-        <PlusCircledIcon className="w-6 h-6 mr-3" /> Create new Product
-      </Button>
+      <ModalForm type="create" />
     </main>
   );
 }

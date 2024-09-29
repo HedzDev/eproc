@@ -32,13 +32,35 @@ export async function createCategory(formData: FormData) {
   revalidatePath("/categories");
 }
 
+export async function createProduct(formData: FormData) {
+  const data = {
+    name: formData.get("name"),
+    description: formData.get("description"),
+    price: +(formData.get("price") || 0),
+    image: formData.get("image"),
+    category: formData.getAll("category").map((cat) => `/categories/${cat}`),
+  };
+
+  try {
+    await api.post("http://localhost:80/products", JSON.stringify(data), {
+      headers: {
+        "Content-Type": "application/ld+json",
+      },
+    });
+  } catch (error) {
+    console.error(error);
+  }
+
+  revalidatePath("/products");
+}
+
 export async function editProduct(formData: FormData, id: number) {
   const data = {
     name: formData.get("name"),
     description: formData.get("description"),
     price: +(formData.get("price") || 0),
     image: formData.get("image"),
-    category: formData.get("category"),
+    category: formData.getAll("category"),
   };
 
   try {
@@ -47,6 +69,19 @@ export async function editProduct(formData: FormData, id: number) {
         "Content-Type": "application/ld+json",
       },
     });
+  } catch (error) {
+    console.error(error);
+  }
+
+  revalidatePath("/products");
+}
+
+export async function deleteProduct(id: number) {
+  try {
+    if (!id) {
+      throw new Error("Product ID is required");
+    }
+    await api.delete(`http://localhost:80/products/${id}`);
   } catch (error) {
     console.error(error);
   }

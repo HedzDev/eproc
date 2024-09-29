@@ -1,56 +1,24 @@
 "use client";
 
+import { deleteProduct } from "@/actions/actions";
 import { ProductType } from "@/lib/types";
-import { Pencil2Icon, TrashIcon } from "@radix-ui/react-icons";
+import { TrashIcon } from "@radix-ui/react-icons";
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
-import EditItemForm from "./EditItemForm";
+import ModalForm from "./ModalForm";
 import { Button } from "./ui/button";
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "./ui/dialog";
 
 type ProductCardProps = {
   product: ProductType;
 };
 
 export default function ProductCard({ product }: ProductCardProps) {
-  const [isFormOpen, setIsFormOpen] = useState(false);
-
-  function handleDelete(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
-    e.stopPropagation();
-    e.preventDefault();
-    console.log("Delete product");
-  }
-
   return (
     <div className="relative">
-      <Dialog open={isFormOpen} onOpenChange={setIsFormOpen}>
-        <DialogTrigger asChild>
-          <Button className="absolute top-3 right-3 bg-cyan-700 hover:bg-cyan-700/70 text-white/90 z-10">
-            <Pencil2Icon />
-          </Button>
-        </DialogTrigger>
-
-        <DialogContent className="">
-          <DialogHeader>
-            <DialogTitle>Edit Item</DialogTitle>
-          </DialogHeader>
-
-          <EditItemForm
-            product={product}
-            onFormSubmission={() => setIsFormOpen(false)}
-          />
-        </DialogContent>
-      </Dialog>
+      <ModalForm type="edit" product={product} />
 
       <Button
-        onClick={handleDelete}
+        onClick={async () => await deleteProduct(product.id)}
         className="absolute top-14 right-3 bg-cyan-700 hover:bg-cyan-700/70 text-white/90 z-10"
       >
         <TrashIcon />

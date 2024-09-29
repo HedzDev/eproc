@@ -1,35 +1,41 @@
 "use client";
 
-import { editProduct } from "@/actions/actions";
+import { createProduct, editProduct } from "@/actions/actions";
 import { ProductType } from "@/lib/types";
-import { Label } from "@radix-ui/react-label";
 import { useForm } from "react-hook-form";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
+import { Label } from "./ui/label";
 import { Textarea } from "./ui/textarea";
 
-type EditItemFormProps = {
-  product: ProductType;
+type ProductFormProps = {
+  product?: ProductType;
   onFormSubmission: () => void;
+  type: "edit" | "create";
 };
 
-export default function EditItemForm({
+export default function ProductForm({
   product,
   onFormSubmission,
-}: EditItemFormProps) {
+  type,
+}: ProductFormProps) {
   const {
     register,
     trigger,
     formState: { errors },
   } = useForm({
-    defaultValues: {
-      name: product.name,
-      description: product.description,
-      price: product.price,
-      image: product.image,
-      category: product.category,
-    },
+    defaultValues:
+      type === "edit"
+        ? {
+            name: product?.name,
+            description: product?.description,
+            price: product?.price,
+            image: product?.image,
+            category: product?.category,
+          }
+        : undefined,
   });
+  console.log(product);
 
   return (
     <form
@@ -38,11 +44,18 @@ export default function EditItemForm({
 
         if (!result) return;
 
-        await editProduct(
-          new FormData(event?.target as HTMLFormElement),
-          product.id
-        );
         onFormSubmission();
+
+        if (type === "edit") {
+          if (product) {
+            await editProduct(
+              new FormData(event?.target as HTMLFormElement),
+              product.id
+            );
+          }
+        } else if (type === "create") {
+          await createProduct(new FormData(event?.target as HTMLFormElement));
+        }
       }}
     >
       <div className="space-y-1">
@@ -107,10 +120,27 @@ export default function EditItemForm({
         )}
       </div>
 
+      {type === "create" && (
+        <div className="space-y-1">
+          <Label htmlFor="category">Category</Label>
+          <Input
+            id="category"
+            {...register("category", {
+              required: "Category is required",
+            })}
+          />
+          {errors.category && (
+            <p className="text-red-500">{String(errors.category.message)}</p>
+          )}
+        </div>
+      )}
+
       <div className="space-y-1">
-        <Input id="category" type="hidden" {...register("category")} />
+        {type === "edit" && (
+          <Input id="category" type="hidden" {...register("category")} />
+        )}
         <Button type="submit" className="mt-4">
-          Edit
+          {type === "edit" ? "Edit" : "Create"}
         </Button>
       </div>
     </form>
